@@ -1,0 +1,45 @@
+page-addressmodel {
+    .valid {
+        background-image: url('../assets/imgs/valid.png');
+        background-repeat: no-repeat;
+        background-position: 100%;;
+        background-size: 25px;
+    }
+
+    .invalid{
+        background-image: url('../assets/imgs/invalid.png');
+        background-repeat: no-repeat;
+        background-position: 100%;;
+        background-size: 25px;
+        border-bottom: 1px solid red;
+    }
+
+    .invalidtitle{
+        background-image: url('../assets/imgs/invalid.png');
+        background-repeat: no-repeat;
+        background-position: 100%;;
+        background-size: 25px;
+      }
+
+      .select .select-icon{
+        padding-right: 40px !important;
+      }
+
+    ion-item.item-input {
+        padding-left: 2px;
+    }
+
+    .item-inner {
+        padding-right: 2px!important;
+     }
+
+     .label {
+        margin: 0;
+     }
+
+     input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+       appearance: none;
+       margin: 0;
+      }
+
+}
