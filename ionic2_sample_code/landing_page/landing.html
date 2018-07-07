@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-navbar mode="ios">
+    <ion-title>Logo</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="md-menu" style="color:black"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="toppart_landing">
+    <ion-grid style="padding:0px;margin-top:-4px">
+      <ion-row full>
+        <ion-col col-6 style="padding:0px">
+            <button [ngClass]="[heatoil ? 'rectangle-2-copy' : 'rectangle-2']" (click)="heatoil=true;pellets=false;menge_data='Menge in Liter';preis_berechnen_button=false" icon-left ion-button full>
+                <ion-icon name="appname-liters"></ion-icon> Heizöl</button>
+        </ion-col>
+        <ion-col col-6 style="padding:0px">
+            <button [ngClass]="[pellets ? 'rectangle-2-copy' : 'rectangle-2']" (click)="heatoil=false;pellets=true;menge_data='Menge in Kg';preis_berechnen_button=false" icon-left ion-button full>
+                <ion-icon name="appname-kg"></ion-icon> <span style="margin-left: 4px">Pellets</span></button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+    <ion-card class="ioncardstyle">
+      <ion-item [ngClass]="[lieferadresse!='Lieferadresse' ? 'rectangle-5_copy' : 'rectangle-5']" (click)="otherway('lieferadresse')">
+        <ion-icon name="appname-location" item-start></ion-icon>
+        <div [ngClass]="[lieferadresse!='Lieferadresse' ? 'rectangle_color' : 'rectangle']">{{lieferadresse}}</div>
+      </ion-item>
+    </ion-card>
+    <ion-card class="ioncardstyle">
+        <ion-item [ngClass]="[(menge_data!='Menge in Liter' && menge_data!='Menge in Kg') ? 'rectangle-5_copy' : 'rectangle-5']" 
+        (click)="otherway('menge')">
+          <ion-icon *ngIf="heatoil" name="appname-liters" item-start></ion-icon>
+          <ion-icon *ngIf="pellets" name="appname-kg" item-start></ion-icon>
+        <div [ngClass]="[(menge_data!='Menge in Liter' && menge_data!='Menge in Kg') ? 'rectangle_color' : 'rectangle']">{{menge_data}}</div>
+      </ion-item>
+    </ion-card>
+    <p style="text-align: center; margin-top: 20px;">
+      <button ion-button round (click)="preiscalc()" [ngClass]="[preis_berechnen_button ? 'rectangle-6_copy' : 'rectangle-6']">Preis berechnen</button>
+    </p>
+  </div>
+
+  <!-- Displaing news articles -->
+  <div class="newsarticles">
+    <ion-list no-lines>
+      <div *ngFor="let tag of getallimgtags;let first=index;let last=last">
+        <div *ngFor="let data of xmltojson;let second=index;let lst=last">
+          <p *ngIf="first==second" class="currentdate"> {{data.pubDate | date: 'dd.MM.yyyy'}} &nbsp; {{data.category}}<span></span></p>
+          <p *ngIf="first==second" class="currenttitle">{{data.title}}</p>
+          <button ion-item text-wrap (click)="opennews(data)" mode="md" *ngIf="first==second">
+               <div item-start>
+                <img [src]="tag">
+                 </div>
+                  <p class="currentdescription" [innerHTML]="data['content:encoded'] | striphtml | truncate:[85, '...'] "></p>
+                </button>
+          <div *ngIf="first==second" class="fadeline"></div>
+        </div>
+      </div>
+    </ion-list>
+  </div>
+
+</ion-content>
